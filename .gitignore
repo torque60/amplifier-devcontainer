@@ -1,0 +1,5 @@
+# Amplifier はコンテナ作成時に clone されるため、このリポジトリでは追跡しない
+amplifier/
+
+# devcontainer 実行時に生成されるキャッシュ等
+.cache/
