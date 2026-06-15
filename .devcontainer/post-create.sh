@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 #
-# Amplifier quickstart devcontainer post-create script.
-# Runs once after the container is created. It performs everything in the
-# Amplifier QuickStart up to (but not including) running `claude`:
-#   1. Clone Amplifier (amplifier-claude branch)
-#   2. make install  (creates .venv via uv, installs Node deps via pnpm)
-#   3. Configure new terminals so the student only needs to type `claude`
+# Amplifier クイックスタート用 devcontainer post-create スクリプト。
+# コンテナ作成後に一度だけ実行される。Amplifier クイックスタートのうち、
+# `claude` を実行する直前までを自動で行う:
+#   1. Amplifier (amplifier-claude ブランチ) を clone
+#   2. make install (uv で .venv 作成、pnpm で Node 依存を導入)
+#   3. 新しいターミナルで `claude` と打つだけで済むようシェルを設定
 #
 set -euo pipefail
 
-# Persist logs for troubleshooting (see Amplifier DISCOVERIES.md guidance).
+# トラブルシュート用にログを残す (Amplifier の DISCOVERIES.md の指針を参照)。
 LOG_FILE="/tmp/devcontainer-post-create.log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
@@ -21,14 +21,14 @@ echo "========================================="
 echo "Amplifier quickstart post-create  $(date)"
 echo "========================================="
 
-# Ensure the persisted ~/.claude volume is writable by the container user.
-# Named volumes can mount as root-owned on first creation.
+# 永続化した ~/.claude ボリュームをコンテナユーザーが書き込めるようにする。
+# 名前付きボリュームは初回作成時に root 所有でマウントされることがある。
 if [ -d "$HOME/.claude" ]; then
   sudo chown -R "$(id -u):$(id -g)" "$HOME/.claude" 2>/dev/null || true
 fi
 
-# pnpm needs SHELL set to configure its global bin dir, otherwise `pnpm setup`
-# fails with ERR_PNPM_UNKNOWN_SHELL (see Amplifier DISCOVERIES.md).
+# pnpm はグローバル bin ディレクトリ設定に SHELL が必要。未設定だと `pnpm setup`
+# が ERR_PNPM_UNKNOWN_SHELL で失敗する (Amplifier の DISCOVERIES.md 参照)。
 echo ""
 echo "🔧  Configuring pnpm..."
 export SHELL="${SHELL:-/bin/bash}"
@@ -37,7 +37,7 @@ export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
 export PATH="$PNPM_HOME:$PATH"
 echo "    ✅ pnpm configured"
 
-# Clone Amplifier if it is not already present (idempotent across rebuilds).
+# Amplifier が未取得の場合のみ clone する (再ビルドしても安全な冪等処理)。
 echo ""
 if [ ! -d "$AMPLIFIER_DIR/.git" ]; then
   echo "⬇️   Cloning Amplifier ($AMPLIFIER_BRANCH branch)..."
@@ -47,15 +47,15 @@ else
   echo "ℹ️   Amplifier already present; skipping clone."
 fi
 
-# Install dependencies. Run from inside the repo so the Makefile sees the
-# expected working directory.
+# 依存関係をインストールする。Makefile が想定する作業ディレクトリで動くよう
+# リポジトリ内に入って実行する。
 echo ""
 echo "📦  Running 'make install' (this can take several minutes)..."
 ( cd "$AMPLIFIER_DIR" && make install )
 echo "    ✅ Dependencies installed"
 
-# Make every new terminal land in the Amplifier directory with the virtual
-# environment activated, so the student only needs to type `claude`.
+# 新しいターミナルが毎回 Amplifier ディレクトリに入り、仮想環境を有効化した
+# 状態になるようにする。これで学生は `claude` と打つだけで済む。
 echo ""
 echo "🔧  Configuring shell so 'claude' works immediately..."
 BASHRC="$HOME/.bashrc"
