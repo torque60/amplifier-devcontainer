@@ -6,21 +6,6 @@
 
 ---
 
-## 🧩 何が自動で行われるか（両方共通）
-
-コンテナ作成時 ([post-create.sh](.devcontainer/post-create.sh)) に、以下がすべて自動実行されます。
-
-| ステップ | 内容 |
-|---|---|
-| 前提条件のインストール | Python 3.11+ / uv / Node.js / pnpm / git / make / **Claude Code CLI** |
-| Amplifier の取得 | `amplifier-claude` ブランチを `./amplifier` に clone |
-| 依存関係の導入 | `amplifier` 内で `make install`（`.venv` 作成 + Node 依存導入） |
-| シェル設定 | 新しいターミナルが自動で `amplifier` に移動し、`.venv` を有効化 |
-
-> 公式リファレンス: [Claude Code 開発コンテナ](https://code.claude.com/docs/ja/devcontainer)
-
----
-
 ## 🧭 どちらの方法で使う？
 
 使う環境によって、最初の準備と開き方だけが異なります（**起動後の操作は完全に共通**です）。
@@ -168,6 +153,23 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 
 ---
 
+## 🧩 何が自動で行われるか（両方共通）
+
+> 参考情報です。使うだけなら読まなくて構いません。**コンテナ作成時に舞台裏で実行される内容**をまとめています。
+
+コンテナ作成時 ([post-create.sh](.devcontainer/post-create.sh)) に、以下がすべて自動実行されます。
+
+| ステップ | 内容 |
+|---|---|
+| 前提条件のインストール | Python 3.11+ / uv / Node.js / pnpm / git / make / **Claude Code CLI** |
+| Amplifier の取得 | `amplifier-claude` ブランチを `./amplifier` に clone |
+| 依存関係の導入 | `amplifier` 内で `make install`（`.venv` 作成 + Node 依存導入） |
+| シェル設定 | 新しいターミナルが自動で `amplifier` に移動し、`.venv` を有効化 |
+
+> 公式リファレンス: [Claude Code 開発コンテナ](https://code.claude.com/docs/ja/devcontainer)
+
+---
+
 ## 📁 構成ファイル
 
 ```
@@ -187,5 +189,5 @@ amplifier-devcontainer/
 ## ❓ なぜ「キット」を別フォルダにしているのか
 
 Amplifier 本体には別の `.devcontainer` が同梱されていますが、このキットは
-**「開くだけで Amplifier を自動取得してセットアップする」学生向けの入口**として独立させています。
+**「開くだけで Amplifier を自動取得してセットアップする」初学者向けの入口**として独立させています。
 Amplifier 本体を直接いじらずに配布・更新できます。
