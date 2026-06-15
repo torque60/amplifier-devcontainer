@@ -14,7 +14,7 @@ Dev Containerを開くだけで、Amplifier のクイックスタート前提条
 最初に**このキットを「テンプレート」として自分の GitHub リポジトリにコピー**します。
 
 1. キットのリポジトリ（テンプレート）を GitHub で開く
-2. 緑色の **「Use this template」** ボタン → **「Create a new repository」**
+2. 右上にある緑色の **「Use this template」** ボタン → **「Create a new repository」**
 3. 自分のアカウントを選び、好きなリポジトリ名を付けて作成
 
 > `Code` ボタンからの直接利用ではなく、テンプレートで**自分専用のコピー**を作ることで、設定変更や課題の保存を自分のリポジトリで自由に行えます。
