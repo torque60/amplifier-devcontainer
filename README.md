@@ -156,13 +156,26 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 
 ## 🧩 何が自動で行われるか（両方共通）
 
-> 参考情報です。使うだけなら読まなくて構いません。**コンテナ作成時に舞台裏で実行される内容**をまとめています。
+> 参考情報です。使うだけなら読まなくて構いません。**舞台裏で実行される内容**をまとめています。
+> いずれも**コンテナの中**で行われます。ホスト（PC）側の Docker Desktop・VS Code・Git は、これらの前に**あなたが手動で**用意するもので、ここには含まれません（上部「🧭 どちらの方法で使う？」を参照）。
 
-コンテナ作成時 ([post-create.sh](.devcontainer/post-create.sh)) に、以下がすべて自動実行されます。
+自動処理は2段階に分かれます。
+
+**① コンテナのビルド時** — `devcontainer.json` の [features](.devcontainer/devcontainer.json) が前提ツールをインストール
+
+| ツール | 用途 |
+|---|---|
+| Python 3.11+ | ベースイメージに同梱 |
+| uv | Python パッケージマネージャ |
+| Node.js / pnpm | Amplifier の Node 系依存 |
+| make | `make install` / `make check` 等 |
+| **Claude Code CLI** | `claude` コマンド本体 |
+| gh | GitHub CLI（任意） |
+
+**② コンテナ作成後** — [post-create.sh](.devcontainer/post-create.sh) が一度だけ実行
 
 | ステップ | 内容 |
 |---|---|
-| 前提条件のインストール | Python 3.11+ / uv / Node.js / pnpm / git / make / **Claude Code CLI** |
 | Amplifier の取得 | `amplifier-claude` ブランチを `./amplifier` に clone |
 | 依存関係の導入 | `amplifier` 内で `make install`（`.venv` 作成 + Node 依存導入） |
 | シェル設定 | 新しいターミナルが自動で `amplifier` に移動し、`.venv` を有効化 |
