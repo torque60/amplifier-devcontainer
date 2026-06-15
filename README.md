@@ -4,30 +4,14 @@
 
 Dev Containerを開くだけで、Amplifier のクイックスタート前提条件のインストールが**自動**で完了します。あなたがやることは、開いた後にターミナルで `claude` と打つことだけです。
 
----
-
-## 🧭 どちらの方法で使う？
-
-使う環境によって、最初の準備と開き方だけが異なります（**起動後の操作は完全に共通**です）。
-
-| | 🅰️ GitHub Codespaces | 🅱️ ローカル（VS Code + Docker） |
-|---|---|---|
-| 必要なもの | GitHub アカウント + ブラウザ | Docker Desktop + VS Code + 拡張 + Git |
-| 実行される場所 | GitHub のクラウド上 | あなたの PC 上 |
-| インストール作業 | **不要**（PC に何も入れない） | Docker Desktop 等の導入が必要 |
-| 向いている人 | とにかくすぐ試したい / PC に Docker を入れたくない | 自分の PC で動かしたい / オフライン重視 |
-| 費用 | 無料枠あり（超過分は課金） | 無料 |
-
-- 迷ったら → **🅰️ Codespaces**（最も手軽）
-- 自分の環境で腰を据えて使うなら → **🅱️ ローカル**
-
-手順は、共通の「テンプレートから自分のリポジトリを作る」→ 方法A または B、の順です。
+> このキットは **GitHub Codespaces** での利用を前提に説明しています（PC に何もインストールせず、ブラウザだけで始められます）。
+> 自分の PC の **VS Code + Docker** で動かしたい場合は、おまけの [**ローカルでの使い方（LOCAL_SETUP.md）**](./LOCAL_SETUP.md) を参照してください。
 
 ---
 
-## 🚀 まず：テンプレートから自分のリポジトリを作る（共通）
+## 🚀 まず：テンプレートから自分のリポジトリを作る
 
-A・B どちらの方法でも、最初に**このキットを「テンプレート」として自分の GitHub リポジトリにコピー**します。
+最初に**このキットを「テンプレート」として自分の GitHub リポジトリにコピー**します。
 
 1. キットのリポジトリ（テンプレート）を GitHub で開く
 2. 緑色の **「Use this template」** ボタン → **「Create a new repository」**
@@ -40,7 +24,7 @@ A・B どちらの方法でも、最初に**このキットを「テンプレー
 
 ---
 
-## 🅰️ 方法A: GitHub Codespaces で使う
+## ☁️ Codespace を作成する
 
 ### 必要なもの
 - **GitHub アカウント**
@@ -53,47 +37,15 @@ A・B どちらの方法でも、最初に**このキットを「テンプレー
 
 2. **Codespace を作成する**
    - 緑色の **`<> Code`** ボタン → **`Codespaces`** タブ → **`Create codespace on main`**
-   - クラウド上でコンテナが自動ビルドされ、[何が自動で行われるか](#-何が自動で行われるか両方共通) の処理がすべて走ります（初回は数分）
-
-3. **`claude` を実行** → [▶ コンテナ起動後（両方共通）](#-コンテナ起動後両方共通claude-を実行) へ
+   - クラウド上でコンテナが自動ビルドされ、[何が自動で行われるか](#-何が自動で行われるか) の処理がすべて走ります（初回は数分）
 
 > 公式手順: [リポジトリの codespace を作成する](https://docs.github.com/ja/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository)
 
 ---
 
-## 🅱️ 方法B: ローカル（VS Code + Docker）で使う
+## ▶ コンテナ起動後：`claude` を実行
 
-### 必要なもの（一度だけ）
-
-1. **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**（起動しておく）
-   - Windows の場合は WSL2 バックエンドを有効化
-2. **[Visual Studio Code](https://code.visualstudio.com/)**
-3. VS Code 拡張 **[Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)**
-4. **[Git](https://git-scm.com/downloads)**（自分のリポジトリを `git clone` するため）
-
-> 初めての方は [VS Code Dev Containers チュートリアル](https://code.visualstudio.com/docs/devcontainers/tutorial) も参考にしてください。
-
-### 手順
-
-1. **作成した自分のリポジトリを取得して VS Code で開く**
-   ```bash
-   git clone <作成した自分のリポジトリの URL>
-   cd <リポジトリ名>
-   code .
-   ```
-
-2. **コンテナーで再度開く**
-   - 右下に出る通知の **「コンテナーで再度開く (Reopen in Container)」** をクリック
-   - 通知が出ない場合: `F1`（Mac は `Cmd+Shift+P`／Win・Linux は `Ctrl+Shift+P`）→ **Dev Containers: Reopen in Container**
-   - 初回はイメージ取得と [自動処理](#-何が自動で行われるか両方共通) のため数分かかります（ターミナルにログが流れます）
-
-3. **`claude` を実行** → [▶ コンテナ起動後（両方共通）](#-コンテナ起動後両方共通claude-を実行) へ
-
----
-
-## ▶ コンテナ起動後（両方共通）：`claude` を実行
-
-ビルドが完了したら、A・B どちらの方法でも操作は同じです。
+ビルドが完了したら:
 
 1. **新しいターミナルを開く**
    - メニュー **「ターミナル（Terminal）」→「新しいターミナル（New Terminal）」**
@@ -118,8 +70,7 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 そのため **コンテナを再ビルドしてもサインインし直す必要はありません**。
 （仕組みの詳細: [認証と設定の保持](https://code.claude.com/docs/ja/devcontainer#persist-authentication-and-settings-across-rebuilds)）
 
-- **🅱️ ローカル**: ボリュームを削除しない限り保持されます。
-- **🅰️ Codespaces**: 停止・再起動・リビルドをまたいで保持されます。ただし **Codespace 自体を削除すると失われます**（既定で 30 日間未使用の Codespace は自動削除）。再作成時はサインインし直してください。
+ただし Codespaces では、停止・再起動・リビルドをまたいで保持される一方、**Codespace 自体を削除すると失われます**（既定で 30 日間未使用の Codespace は自動削除）。再作成時はサインインし直してください。
 
 ---
 
@@ -128,7 +79,7 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 - この Dev Container は**ネットワーク送信制限 (egress firewall) を入れていません**。
   これは Claude Code の **Web 検索 / Web 取得 / Playwright によるブラウジング**を使えるようにするためです
   （送信先を制限すると、これらが任意のサイトへアクセスできず動作しなくなるため）。
-- したがって、コンテナ内のコードは**ホスト（またはクラウド環境）と同等のネットワーク権限**を持ちます。
+- したがって、コンテナ内のコードは**クラウド環境と同等のネットワーク権限**を持ちます。
   **信頼できるリポジトリ・コードでのみ使用してください。**
 - **`~/.ssh` やクラウド認証情報などの秘密情報をコンテナにマウントしないでください。**
   必要な場合はリポジトリスコープ／短期トークンを使ってください。
@@ -148,18 +99,18 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 |---|---|
 | `claude: command not found` | ビルド（post-create）が未完了か失敗。ログを確認: `cat /tmp/devcontainer-post-create.log` |
 | ターミナルが `amplifier` に入らない | post-create 完了後に**新しい**ターミナルを開く |
-| `make install` が失敗する | ネットワーク／プロキシを確認のうえ再ビルド（`Dev Containers: Rebuild Container`） |
+| `make install` が失敗する | ネットワークを確認のうえ再ビルド（`F1` → **Codespaces: Rebuild Container**） |
 | ブラウザでログインしても戻ってこない | ターミナルの `Paste code here if prompted` に、ブラウザ表示のコードを貼り付け |
 | post-create をやり直したい | コンテナ内で `bash .devcontainer/post-create.sh` を再実行（clone 済みなら clone はスキップ） |
-| 🅰️ Codespaces で「コンテナーで再度開く」通知が出ない | Codespaces では不要です。Codespace を作成した時点で自動ビルドされます |
-| 🅱️ ローカルでビルドが始まらない | Docker Desktop が**起動しているか**を確認 |
+
+> ローカル（VS Code + Docker）固有のトラブルは [LOCAL_SETUP.md](./LOCAL_SETUP.md) を参照してください。
 
 ---
 
-## 🧩 何が自動で行われるか（両方共通）
+## 🧩 何が自動で行われるか
 
 > 参考情報です。使うだけなら読まなくて構いません。**舞台裏で実行される内容**をまとめています。
-> いずれも**コンテナの中**で行われます。ホスト（PC）側の Docker Desktop・VS Code・Git は、これらの前に**あなたが手動で**用意するもので、ここには含まれません（上部「🧭 どちらの方法で使う？」を参照）。
+> いずれも**コンテナの中**で行われます。ホスト（PC）側の準備（Docker Desktop・VS Code・Git）はローカルで使う場合のみ必要で、Codespaces では不要です（→ [LOCAL_SETUP.md](./LOCAL_SETUP.md)）。
 
 自動処理は2段階に分かれます。
 
@@ -191,10 +142,11 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 ```
 amplifier-devcontainer/
 ├── .devcontainer/
-│   ├── devcontainer.json   # ベースイメージ・前提条件 feature・ボリューム・拡張（A/B 共通）
+│   ├── devcontainer.json   # ベースイメージ・前提条件 feature・ボリューム・拡張
 │   └── post-create.sh      # clone + make install + シェル設定（claude 直前まで）
 ├── .gitignore              # clone される amplifier/ やキャッシュを除外
-└── README.md               # このファイル
+├── LOCAL_SETUP.md          # （おまけ）ローカル（VS Code + Docker）での使い方
+└── README.md               # このファイル（Codespaces 前提）
 ```
 
 > `amplifier/` ディレクトリはコンテナ作成時に clone されるため、この Git リポジトリには含めません（`.gitignore` 済み）。
