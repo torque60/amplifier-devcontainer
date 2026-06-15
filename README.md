@@ -12,7 +12,7 @@
 
 | | 🅰️ GitHub Codespaces | 🅱️ ローカル（VS Code + Docker） |
 |---|---|---|
-| 必要なもの | GitHub アカウント + ブラウザ | Docker Desktop + VS Code + 拡張 |
+| 必要なもの | GitHub アカウント + ブラウザ | Docker Desktop + VS Code + 拡張 + Git |
 | 実行される場所 | GitHub のクラウド上 | あなたの PC 上 |
 | インストール作業 | **不要**（PC に何も入れない） | Docker Desktop 等の導入が必要 |
 | 向いている人 | とにかくすぐ試したい / PC に Docker を入れたくない | 自分の PC で動かしたい / オフライン重視 |
@@ -69,6 +69,7 @@ A・B どちらの方法でも、最初に**このキットを「テンプレー
    - Windows の場合は WSL2 バックエンドを有効化
 2. **[Visual Studio Code](https://code.visualstudio.com/)**
 3. VS Code 拡張 **[Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)**
+4. **[Git](https://git-scm.com/downloads)**（自分のリポジトリを `git clone` するため）
 
 > 初めての方は [VS Code Dev Containers チュートリアル](https://code.visualstudio.com/docs/devcontainers/tutorial) も参考にしてください。
 
