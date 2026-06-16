@@ -85,6 +85,22 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 
 ---
 
+## 🛑 Codespace の終わり方
+
+作業を終えるときは、用途に合わせて **停止** か **削除** を選びます。
+
+| 操作 | やり方 | 何が起きる |
+|---|---|---|
+| **停止（Stop）** | リポジトリの **`<> Code` → `Codespaces`** タブ → 対象の **`…` → `Stop codespace`**（ブラウザのタブを閉じるだけでも、一定時間操作がなければ自動停止します） | コンテナを一時停止。**コンピュート（実行）課金が止まります**。`~/.claude` や作業内容はそのまま残り、次回そのまま再開できます。 |
+| **削除（Delete）** | 同じ `Codespaces` タブ → 対象の **`…` → `Delete`** | Codespace を完全に削除。**ストレージ課金も止まります**。`~/.claude` を含む状態は失われ、再作成時はサインインし直しです。 |
+
+> - 迷ったら **停止** で OK（次回すぐ再開できます）。長く使わない・容量を空けたいときは **削除**。
+> - 停止中も**ストレージ課金は続きます**。課金を完全に止めるには削除してください。
+>
+> 公式手順: [Codespace の停止と開始](https://docs.github.com/ja/codespaces/developing-in-a-codespace/stopping-and-starting-a-codespace) ／ [Codespace の削除](https://docs.github.com/ja/codespaces/developing-in-a-codespace/deleting-a-codespace) ／ [Codespaces の課金について](https://docs.github.com/ja/billing/managing-billing-for-your-products/managing-billing-for-github-codespaces/about-billing-for-github-codespaces)
+
+---
+
 ## 🛡️ セキュリティについて（必ずお読みください）
 
 - この Dev Container は**ネットワーク送信制限 (egress firewall) を入れていません**。
