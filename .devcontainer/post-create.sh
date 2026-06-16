@@ -29,12 +29,27 @@ fi
 
 # pnpm はグローバル bin ディレクトリ設定に SHELL が必要。未設定だと `pnpm setup`
 # が ERR_PNPM_UNKNOWN_SHELL で失敗する (Amplifier の DISCOVERIES.md 参照)。
+# さらに make install の `pnpm add -g @anthropic-ai/claude-code` は $PNPM_HOME/bin が
+# PATH にないと "global bin directory is not in PATH" で失敗するため、
+# pnpm setup の前に PNPM_HOME と PATH（…/bin を含む）を確定させておく。
 echo ""
 echo "🔧  Configuring pnpm..."
 export SHELL="${SHELL:-/bin/bash}"
-pnpm setup >/dev/null 2>&1 || true
 export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
-export PATH="$PNPM_HOME:$PATH"
+mkdir -p "$PNPM_HOME/bin"
+export PATH="$PNPM_HOME:$PNPM_HOME/bin:$PATH"   # $PNPM_HOME/bin も通すのが要点
+pnpm setup >/dev/null 2>&1 || true
+# 対話シェル（新しいターミナル）でも pnpm のグローバル bin を通す（冪等追記）。
+PNPM_MARKER="# >>> pnpm-home >>>"
+if ! grep -qF "$PNPM_MARKER" "$HOME/.bashrc" 2>/dev/null; then
+  {
+    echo ""
+    echo "$PNPM_MARKER"
+    echo "export PNPM_HOME=\"$PNPM_HOME\""
+    echo "export PATH=\"\$PNPM_HOME:\$PNPM_HOME/bin:\$PATH\""
+    echo "# <<< pnpm-home <<<"
+  } >> "$HOME/.bashrc"
+fi
 echo "    ✅ pnpm configured"
 
 # Amplifier が未取得の場合のみ clone する (再ビルドしても安全な冪等処理)。
