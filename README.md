@@ -84,6 +84,7 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 - **`~/.ssh` やクラウド認証情報などの秘密情報をコンテナにマウントしないでください。**
   必要な場合はリポジトリスコープ／短期トークンを使ってください。
 - Claude の操作は監視し、想定外のコマンドは承認しないでください。
+- **Claude Code の利用には Anthropic の規約への同意が必要**です。サインインは各自の Anthropic アカウントで行ってください（プランにより適用規約が異なります → [Claude Code 法的・規制対応](https://code.claude.com/docs/ja/legal-and-compliance)）。詳細は下記「ライセンス / Acknowledgements」を参照。
 
 > 送信先を絞った「強化版」が必要な場合は、公式の
 > [ネットワークエグレス制限](https://code.claude.com/docs/ja/devcontainer#restrict-network-egress) と
@@ -145,6 +146,7 @@ amplifier-devcontainer/
 │   ├── devcontainer.json   # ベースイメージ・前提条件 feature・ボリューム・拡張
 │   └── post-create.sh      # clone + make install + シェル設定（claude 直前まで）
 ├── .gitignore              # clone される amplifier/ やキャッシュを除外
+├── LICENSE                 # キット本体のライセンス（MIT）
 ├── LOCAL_SETUP.md          # （おまけ）ローカル（VS Code + Docker）での使い方
 └── README.md               # このファイル（Codespaces 前提）
 ```
@@ -159,3 +161,19 @@ amplifier-devcontainer/
 Amplifier 本体には別の `.devcontainer` が同梱されていますが、このキットは
 **「開くだけで Amplifier を自動取得してセットアップする」初学者向けの入口**として独立させています。
 Amplifier 本体を直接いじらずに配布・更新できます。
+
+---
+
+## 📜 ライセンス / Acknowledgements
+
+- **このキット自体**（`.devcontainer/` の設定・`post-create.sh`・各 `.md`）は **[MIT License](./LICENSE)** で配布しています。
+- このキットは **Amplifier と Claude Code のソースを同梱していません**。ビルド時に各公式から取得・インストールするため、それぞれのライセンス・規約は各提供元に従います。
+
+| 取得されるもの | 提供元 | ライセンス / 規約 |
+|---|---|---|
+| Amplifier | [microsoft/amplifier](https://github.com/microsoft/amplifier) | [MIT License](https://github.com/microsoft/amplifier/blob/main/LICENSE)（Copyright (c) Microsoft Corporation） |
+| Claude Code CLI | Anthropic | **プロプライエタリ**（© Anthropic PBC）。利用は [Anthropic の規約](https://code.claude.com/docs/ja/legal-and-compliance)に従う |
+
+> **Claude Code はオープンソースではありません。** 利用には**各自の Anthropic アカウントでのサインインと規約への同意が必要**で、プランにより適用規約が異なります（Free / Pro / Max → [コンシューマー利用規約](https://www.anthropic.com/legal/consumer-terms)、Team / Enterprise / API → [商用条件](https://www.anthropic.com/legal/commercial-terms)、共通で [使用ポリシー](https://www.anthropic.com/legal/aup)）。
+>
+> ※ 上記は一般的な情報であり、法的助言ではありません。最終的な可否は各原文ライセンス・規約をご確認ください。
