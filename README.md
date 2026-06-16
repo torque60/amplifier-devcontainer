@@ -29,7 +29,7 @@ Dev Containerを開くだけで、Amplifier のクイックスタート前提条
 ### 必要なもの
 - **GitHub アカウント**
 - **ブラウザ**（または GitHub Codespaces 拡張入りの VS Code）
-- PC への Docker / VS Code のインストールは**不要**
+- **Anthropic アカウント** — Claude Code の利用には **Anthropic の有料プラン（Claude Pro / Max など）か、API のクレジット（課金）が必要**です（無料では利用できません。[料金](https://claude.com/pricing)）。
 
 ### 手順
 
