@@ -57,6 +57,16 @@ Dev Containerを開くだけで、Amplifier のクイックスタート前提条
    ```
 3. 初回はサインインを求められます。ブラウザでログインしてください。
 
+> ⚠️ **Codespaces での認証のコツ（つまずきやすい）**
+> サインイン時にブラウザの別タブが開き、メールアドレス宛の **OTP（ワンタイムコード）** を入力します。
+> その後 `localhost` へリダイレクトされますが、**Codespaces ではこのリダイレクトが失敗してエラー画面になります**（クラウド上のコンテナなので手元の `localhost` には戻れません）。
+>
+> **対処**: 失敗してもそのまま閉じず、次のどちらかでコードを取得してください。
+> 1. 認証ページの**リンク（"認証する"等）をもう一度クリック**すると、画面に**認証コードが表示**されます。
+> 2. そのコードをコピーし、**ターミナルの `Paste code here if prompted:` に貼り付けて Enter**。
+>
+> これでサインインが完了します（`localhost` のエラー画面自体は無視して構いません）。
+
 これで Amplifier が使える状態です。たとえば次のように話しかけられます:
 ```
 /ultrathink-task I'm new to "metacognitive recipes". Brainstorm some tool ideas.
@@ -101,7 +111,7 @@ Claude のログイン情報・設定・履歴は `~/.claude` に保存され、
 | `claude: command not found` | ビルド（post-create）が未完了か失敗。ログを確認: `cat /tmp/devcontainer-post-create.log` |
 | ターミナルが `amplifier` に入らない | post-create 完了後に**新しい**ターミナルを開く |
 | `make install` が失敗する | ネットワークを確認のうえ再ビルド（`F1` → **Codespaces: Rebuild Container**） |
-| ブラウザでログインしても戻ってこない | ターミナルの `Paste code here if prompted` に、ブラウザ表示のコードを貼り付け |
+| サインインで `localhost` へのリダイレクトが失敗する | Codespaces では正常な挙動。認証ページのリンクを**もう一度クリック**して表示される**コードをコピー**し、ターミナルの `Paste code here if prompted:` に貼り付け（詳細は[「`claude` を実行」の注記](#-コンテナ起動後claude-を実行)） |
 | post-create をやり直したい | コンテナ内で `bash .devcontainer/post-create.sh` を再実行（clone 済みなら clone はスキップ） |
 
 > ローカル（VS Code + Docker）固有のトラブルは [LOCAL_SETUP.md](./LOCAL_SETUP.md) を参照してください。
